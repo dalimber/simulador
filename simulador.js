@@ -7,11 +7,14 @@ function calcular()
     let egresos=parseFloat(cmpEgresos.value);
 
     let valorDisponible=calcularDisponible(ingresos,egresos);
-    frmtValorDisponible=valorDisponible.toFixed(2);
+    //frmtValorDisponible=valorDisponible.toFixed(2);
+
+    let capacidadPago=calcularCapacidadPago(valorDisponible);
     
 
     //MOSTRAR EN PANTALLA
     let cmpLblDisponible=document.getElementById("spnDisponible");
-    cmpLblDisponible.textContent=frmtValorDisponible;
-    
+    cmpLblDisponible.textContent=valorDisponible;
+    let cmpLblCapacidaPago=document.getElementById("spnCapacidadPago");
+    cmpLblCapacidaPago.textContent=capacidadPago;
 }
