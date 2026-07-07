@@ -22,5 +22,11 @@ function calcularTotalPagar(monto,interes)
     const impuestoYSolca=100;
     let totalPagar=monto+interes+impuestoYSolca;
     return totalPagar;
+}
+function calcularCuotaMensual(totalPagar,plazoAnios) 
+{
+    const plazoMeses=plazoAnios*12;
+    let cuotaMensual=totalPagar/plazoMeses;
+    return cuotaMensual.toFixed(2);
     
 }

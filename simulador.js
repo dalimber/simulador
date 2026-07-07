@@ -20,9 +20,11 @@ function calcular()
     let plazo=parseInt(cmpPlazo.value);
     //CALCULAR VALOR INTERES A PAGAR
     let interesValor=calcularInteresSimple(monto,tasa,plazo);
-    
+
     //CALCULAR VALOR TOTAL A PAGAR
     let totalValor=calcularTotalPagar(monto,interesValor);
+    //CALCULAR CUOTA MENSUAL
+    let cuotaValor=calcularCuotaMensual(totalValor,plazo);
 
     
 
@@ -39,4 +41,7 @@ function calcular()
     //
     let cmpLblTotalValor=document.getElementById("spnTotalPrestamo");
     cmpLblTotalValor.textContent=totalValor;
+    //
+    let cmpLblCuotaValor=document.getElementById("spnCuotaMensual");
+    cmpLblCuotaValor.textContent=cuotaValor;
 }
