@@ -25,6 +25,8 @@ function calcular()
     let totalValor=calcularTotalPagar(monto,interesValor);
     //CALCULAR CUOTA MENSUAL
     let cuotaValor=calcularCuotaMensual(totalValor,plazo);
+    //ANALIZAR CREDITO
+    let estadoCredito=analizarCredito(capacidadPago,cuotaValor);
 
     
 
@@ -44,4 +46,11 @@ function calcular()
     //
     let cmpLblCuotaValor=document.getElementById("spnCuotaMensual");
     cmpLblCuotaValor.textContent=cuotaValor;
+    //
+    let cmpLblEstadoPrestamo=document.getElementById("spnEstadoCredito");
+    
+    if (estadoCredito==true) 
+        {cmpLblEstadoPrestamo.textContent="CREDITO APROBADO";} 
+    else 
+        {cmpLblEstadoPrestamo.textContent="CREDITO RECHAZADO";}
 }

@@ -28,5 +28,10 @@ function calcularCuotaMensual(totalPagar,plazoAnios)
     const plazoMeses=plazoAnios*12;
     let cuotaMensual=totalPagar/plazoMeses;
     return cuotaMensual.toFixed(2);
-    
+}
+function analizarCredito(capacidadPago,cuotaMensual) 
+{
+    if (capacidadPago>cuotaMensual) 
+        {return true;} 
+    else {return false;}   
 }
