@@ -15,5 +15,12 @@ function calcularCapacidadPago(montoDisponible)
 function calcularInteresSimple(monto,tasa,plazoAnios) 
 {
     let valorInteres= plazoAnios*monto*(tasa/100);
-    return valorInteres.toFixed(2);
+    return valorInteres;
+}
+function calcularTotalPagar(monto,interes) 
+{
+    const impuestoYSolca=100;
+    let totalPagar=monto+interes+impuestoYSolca;
+    return totalPagar;
+    
 }
