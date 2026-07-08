@@ -1,6 +1,13 @@
 //AQUI EL JAVASCRIPT PARA MANIPULAR EL HTML
 function calcular() 
 {
+    //------------------------------------------------------
+// Validar todos los campos antes de calcular
+//------------------------------------------------------
+if(!validarFormulario())
+{
+    return;
+}
     //RECUPERAR  INGRESOS Y EGRESOS
     let cmpIngresos=document.getElementById("txtIngresos");
     let cmpEgresos=document.getElementById("txtEgresos");
@@ -28,8 +35,6 @@ function calcular()
     //ANALIZAR CREDITO
     let estadoCredito=analizarCredito(capacidadPago,cuotaValor);
 
-    
-
     //MOSTRAR EN PANTALLA
     //
     let cmpLblDisponible=document.getElementById("spnDisponible");
@@ -53,4 +58,47 @@ function calcular()
         {cmpLblEstadoPrestamo.textContent="CREDITO APROBADO";} 
     else 
         {cmpLblEstadoPrestamo.textContent="CREDITO RECHAZADO";}
+}
+function validarFormulario()
+{
+
+    let valido=true;
+
+
+    valido &= validarCampo(
+        document.getElementById("txtIngresos"),
+        /^\d{1,5}(\.\d{1,2})?$/,
+        "Máximo 5 enteros y 2 decimales."
+    );
+
+
+    valido &= validarCampo(
+        document.getElementById("txtEgresos"),
+        /^\d{1,5}(\.\d{1,2})?$/,
+        "Máximo 5 enteros y 2 decimales."
+    );
+
+
+    valido &= validarCampo(
+        document.getElementById("txtMonto"),
+        /^\d{1,5}$/,
+        "Máximo 5 dígitos enteros."
+    );
+
+
+    valido &= validarRango(
+        document.getElementById("txtPlazo"),
+        1,45
+    );
+
+
+    valido &= validarCampo(
+        document.getElementById("txtTasaInteres"),
+        /^\d{1,2}$/,
+        "Máximo 2 dígitos."
+    );
+
+
+    return Boolean(valido);
+
 }

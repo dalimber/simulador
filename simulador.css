@@ -394,3 +394,71 @@ button{
 }
 
 }
+/*==================================================
+Contenedor del input
+==================================================*/
+.grupoInput{
+
+    position:relative;
+
+    margin-bottom:18px;
+
+}
+
+
+/*==================================================
+Mensaje de error
+==================================================*/
+.mensajeError{
+
+    margin-top:5px;
+
+    color:#d32f2f;
+
+    font-style:italic;
+
+    font-size:12px;
+
+    opacity:0;
+
+    transform:translateY(-4px);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+
+}
+
+
+/* Cuando el mensaje se muestra */
+.mensajeError.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/*==================================================
+Input incorrecto
+==================================================*/
+.inputError{
+
+    border:2px solid #d32f2f !important;
+
+    box-shadow:0 0 8px rgba(211,47,47,.15);
+
+}
+
+
+/*==================================================
+Input normal
+==================================================*/
+input{
+
+    transition:
+        border-color .25s,
+        box-shadow .25s;
+
+}

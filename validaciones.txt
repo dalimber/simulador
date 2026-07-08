@@ -1,0 +1,167 @@
+Prompt1:
+Quiero que sea un excelente agente full estack, necesito tu ayuda tanto en el diseño grafico como en la codificacion para que mi codigo sea lo mas limpio posible, ademas agrega comentarios de lo que se realiza en las lineas para poder comprenderlos.
+Necesito validar los imputs de un formulario sobre un simulador de prestamos que tengo en javascript.
+Reglas de notificacion de validacion al usuario:
+1. Mostrar el mensaje de error debajo del input correspondiente, que no este tan separado de este, minimo de unos 5px.
+2. El mensaje debe mostrarse en color rojo y en cursiva
+3. El despliegue de este mensaje debe verse sutil, elegante y poco invasivo al usuario
+4. Los input que no esten con datos correctos deben pintarse de rojo en su borde, si estan correctos no deben pintar ningun borde de ningun color y retirar el mensaje de error de validacion.
+Condiciones tecnicas:
+-Usar los mismo id de los input, no debes modificarlos:"txtIngresos","txtEgresos","txtMonto","txtPlazo","txtTasaInteres".
+-Estas validaciones deberan hacerse al presionar el boton de accion con el id "btnCalcularCredito" ya que este llama a hacer todo el proceso de la simulacion.
+-Si las validaciones de todos los inputs son positivas se procede a realizar el proceso de simulacion de credito, caso contrario, no se debe realizar ningun proceso.
+Validaciones para input:
+-En todos los input se debe ingresar solo numero.
+-En el input con el id "txtIngresos" deben ser maximo 5 digitos enteros mas 2 decimales
+-En el input con el id "txtEgresos" deben ser maximo 5 digitos enteros mas 2 decimales
+-En el input con el id "txtMonto" deben ser maximo 5 digitos enteros, sin decimales
+-En el input con el id "txtPlazo" debe ser un numero entero que este entre el rango numerico de 1 a 45,hazlo mediante una comparación numerica
+-En el input con el id "txtTasaInteres" deben ser maximo 2 digitos, sin decimales
+Quiero que me indiques que partes debo agregar a mi archivo css ya definido para poder apreciar los cambios visuales de las validaciones. Ademas Que debo cambiar en mi codigo HTML que te comparto a continuacion para lograr la validacion:
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Crédito</title>
+
+    <link rel="stylesheet" href="simulador.css">
+
+    <script src="simulador.js"></script>
+    <script src="funciones.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            <div class="logo-circle">$</div>
+        </div>
+
+        <div class="logo-text">
+            <h3>FINANCREDIT</h3>
+            <small>Entidad Financiera</small>
+        </div>
+
+    </div>
+
+    <h1>Simulador de Crédito</h1>
+
+    <h2>Datos Financieros</h2>
+
+    <label>Ingresos</label>
+    <input type="text" id="txtIngresos">
+
+    <label>Egresos</label>
+    <input type="text" id="txtEgresos">
+
+    <p>Disponible
+        <span id="spnDisponible"></span>
+    </p>
+
+    <p>Capacidad de pago mensual
+        <span id="spnCapacidadPago"></span>
+    </p>
+
+    <h2>Solicitud de Crédito</h2>
+
+    <label>Monto</label>
+    <input type="text" id="txtMonto">
+
+    <label>Plazo en años</label>
+    <input type="text" id="txtPlazo">
+
+    <label>Tasa de interés (%)</label>
+    <input type="text" id="txtTasaInteres">
+
+    <p>Interés a pagar
+        <span id="spnInteresPagar"></span>
+    </p>
+
+    <p>Total préstamo
+        <span id="spnTotalPrestamo"></span>
+    </p>
+
+    <p>Cuota mensual
+        <span id="spnCuotaMensual"></span>
+    </p>
+
+    <p>Estado de crédito
+        <span id="spnEstadoCredito">ANALIZANDO...</span>
+    </p>
+
+    <div class="buttons">
+
+        <button id="btnCalcularCredito" onclick="calcular()">
+            Calcular Crédito
+        </button>
+
+        <button id="btnReiniciar">
+            Reiniciar
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+Tambien te comparto a continuacion mi funcion calcular() del archivo JS que es a la que llamo para ejecutar toda la simulacion mediante el boton con el id "btnCalcularCredito" y donde se debera agregar las validaciones para que se ejecuten al momento de presionar dicho boton; si todas las validaciones son correctas se ejecuta la simulacion, caso contrario no se ejecuta la simulacion; ademas si consideras que es mejor crear una funcion fuera de la funcion calcular() y despues agregar un llamado de la funcion de validacion dentro de la funcion calcular o viceversa, hazlo el codigo debe ser lo mas limpio posible.
+Codigo JS:
+//AQUI EL JAVASCRIPT PARA MANIPULAR EL HTML
+function calcular() 
+{
+    //RECUPERAR  INGRESOS Y EGRESOS
+    let cmpIngresos=document.getElementById("txtIngresos");
+    let cmpEgresos=document.getElementById("txtEgresos");
+    let ingresos=parseFloat(cmpIngresos.value);
+    let egresos=parseFloat(cmpEgresos.value);
+    //CALCULAR  VALOR DISPONIBLE
+    let valorDisponible=calcularDisponible(ingresos,egresos);
+    //frmtValorDisponible=valorDisponible.toFixed(2);
+    //CALCULAR CAPACIDAD PAGO
+    let capacidadPago=calcularCapacidadPago(valorDisponible);
+    //RECUPERAR VALOR INTERES
+    let cmpMonto=document.getElementById("txtMonto");
+    let cmpTasa=document.getElementById("txtTasaInteres");
+    let cmpPlazo=document.getElementById("txtPlazo");
+    let monto=parseInt(cmpMonto.value);
+    let tasa=parseInt(cmpTasa.value);
+    let plazo=parseInt(cmpPlazo.value);
+    //CALCULAR VALOR INTERES A PAGAR
+    let interesValor=calcularInteresSimple(monto,tasa,plazo);
+
+    //CALCULAR VALOR TOTAL A PAGAR
+    let totalValor=calcularTotalPagar(monto,interesValor);
+    //CALCULAR CUOTA MENSUAL
+    let cuotaValor=calcularCuotaMensual(totalValor,plazo);
+    //ANALIZAR CREDITO
+    let estadoCredito=analizarCredito(capacidadPago,cuotaValor);
+
+    //MOSTRAR EN PANTALLA
+    //
+    let cmpLblDisponible=document.getElementById("spnDisponible");
+    cmpLblDisponible.textContent=valorDisponible;
+    //
+    let cmpLblCapacidaPago=document.getElementById("spnCapacidadPago");
+    cmpLblCapacidaPago.textContent=capacidadPago;
+    //
+    let cmpLblInteresValor=document.getElementById("spnInteresPagar");
+    cmpLblInteresValor.textContent=interesValor;
+    //
+    let cmpLblTotalValor=document.getElementById("spnTotalPrestamo");
+    cmpLblTotalValor.textContent=totalValor;
+    //
+    let cmpLblCuotaValor=document.getElementById("spnCuotaMensual");
+    cmpLblCuotaValor.textContent=cuotaValor;
+    //
+    let cmpLblEstadoPrestamo=document.getElementById("spnEstadoCredito");
+    
+    if (estadoCredito==true) 
+        {cmpLblEstadoPrestamo.textContent="CREDITO APROBADO";} 
+    else 
+        {cmpLblEstadoPrestamo.textContent="CREDITO RECHAZADO";}
+}
