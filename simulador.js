@@ -14,10 +14,10 @@ if(!validarFormulario())
     let ingresos=parseFloat(cmpIngresos.value);
     let egresos=parseFloat(cmpEgresos.value);
     //CALCULAR  VALOR DISPONIBLE
-    let valorDisponible=calcularDisponible(ingresos,egresos);
+    let valorDisponible=parseFloat(calcularDisponible(ingresos,egresos));
     //frmtValorDisponible=valorDisponible.toFixed(2);
     //CALCULAR CAPACIDAD PAGO
-    let capacidadPago=calcularCapacidadPago(valorDisponible);
+    let capacidadPago=parseFloat(calcularCapacidadPago(valorDisponible));
     //RECUPERAR VALOR INTERES
     let cmpMonto=document.getElementById("txtMonto");
     let cmpTasa=document.getElementById("txtTasaInteres");
@@ -92,10 +92,9 @@ function validarFormulario()
     );
 
 
-    valido &= validarCampo(
+    valido &= validarRango(
         document.getElementById("txtTasaInteres"),
-        /^\d{1,2}$/,
-        "Máximo 2 dígitos."
+        1,80
     );
 
 
