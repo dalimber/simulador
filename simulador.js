@@ -102,3 +102,68 @@ function validarFormulario()
     return Boolean(valido);
 
 }
+//======================================================
+// Reinicia el formulario y limpia todos los resultados
+//======================================================
+function reiniciar()
+{
+    //--------------------------------------------------
+    // Limpiar los inputs
+    //--------------------------------------------------
+    document.getElementById("txtIngresos").value = "";
+    document.getElementById("txtEgresos").value = "";
+    document.getElementById("txtMonto").value = "";
+    document.getElementById("txtPlazo").value = "";
+    document.getElementById("txtTasaInteres").value = "";
+
+
+    //--------------------------------------------------
+    // Limpiar los resultados mostrados en pantalla
+    //--------------------------------------------------
+    document.getElementById("spnDisponible").textContent = "";
+    document.getElementById("spnCapacidadPago").textContent = "";
+    document.getElementById("spnInteresPagar").textContent = "";
+    document.getElementById("spnTotalPrestamo").textContent = "";
+    document.getElementById("spnCuotaMensual").textContent = "";
+    document.getElementById("spnEstadoCredito").textContent = "";
+
+
+    //--------------------------------------------------
+    // Lista de todos los inputs
+    //--------------------------------------------------
+    const inputs = [
+        "txtIngresos",
+        "txtEgresos",
+        "txtMonto",
+        "txtPlazo",
+        "txtTasaInteres"
+    ];
+
+
+    //--------------------------------------------------
+    // Eliminar estilos y mensajes de validación
+    //--------------------------------------------------
+    inputs.forEach(function(id)
+    {
+        // Obtener el input
+        const input = document.getElementById(id);
+
+        // Quitar el borde rojo
+        input.classList.remove("inputError");
+
+        // Buscar el mensaje de error asociado
+        const mensaje = input.parentNode.querySelector(".mensajeError");
+
+        // Si existe, eliminarlo completamente del HTML
+        if (mensaje)
+        {
+            mensaje.remove();
+        }
+    });
+
+
+    //--------------------------------------------------
+    // Regresar el cursor al primer campo
+    //--------------------------------------------------
+    document.getElementById("txtIngresos").focus();
+}
